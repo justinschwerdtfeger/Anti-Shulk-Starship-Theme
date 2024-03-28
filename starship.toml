@@ -1,38 +1,8 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
-format = """
-[](fg:color_fg_light)\
-$os\
-[](fg:color_fg_light bg:color_dir)\
-$directory\
-[ ](fg:color_dir)\
-"""
+format = "[]()$os[](bg:bright-blue)$directory[ ](fg:bright-blue)"
 
-# right_format = """
-# $git_branch\
-# $git_status\
-# $docker_context\
-# $container\
-# $hostname\
-# $package\
-# $c\
-# $rust\
-# $golang\
-# $nodejs\
-# $php\
-# $java\
-# $kotlin\
-# $haskell\
-# $python\
-# $cmd_duration\
-# """
 right_format = """
-$username\
-$hostname\
-$localip\
-$shlvl\
-$singularity\
-$kubernetes\
 $vcsh\
 $fossil_branch\
 $fossil_metrics\
@@ -43,11 +13,13 @@ $git_metrics\
 $git_status\
 $hg_branch\
 $pijul_channel\
-$docker_context\
+\
 $package\
+\
 $c\
 $cmake\
 $cobol\
+$crystal\
 $daml\
 $dart\
 $deno\
@@ -88,52 +60,41 @@ $typst\
 $vlang\
 $vagrant\
 $zig\
-$buf\
-$nix_shell\
-$conda\
-$meson\
-$spack\
-$memory_usage\
+\
 $aws\
-$gcloud\
-$openstack\
-$azure\
-$direnv\
-$env_var\
-$crystal\
-$custom\
-$sudo\
-$cmd_duration\
-$line_break\
-$jobs\
-$battery\
-$status\
+$buf\
+$conda\
 $container\
+$docker_context\
+$gcloud\
+$hostname\
+$nix_shell\
+$meson\
+$openstack\
+$spack\
+$singularity\
+$kubernetes\
+\
+$battery\
+$cmd_duration\
+\
+$jobs\
+$username\
+$localip\
+$shlvl\
+$memory_usage\
+$azure\
+$env_var\
+$custom\
+$direnv\
 $shell\
+$sudo\
+$status\
 """
-
-palette = "main"
-
-[palettes.main]
-color_fg_light = "#DBF5FA"
-color_fg_dark = "#010228"
-color_dir = "#0077B6"
-color_git = "#689d6a"
-color_docker = "#1D63ED"
-color_container = "#4F433C"
-color_ssh = "#73BF45"
-color_rust = "#d65d0e"
-color_java = "#d65d0e"
-color_c = "#649AD2"
-color_cmake = "#014D8B"
-color_cmd_duration = "#3c3836"
-color_battery = "#3c3836"
-color_package = "#AD7E4E"
 
 [os]
 disabled = false
-style = "bg:color_fg_light fg:color_dir"
-format = "[$symbol ]($style)"
+format = "[$symbol ](inverted)"
 
 [os.symbols]
 Windows = "󰍲"
@@ -157,38 +118,60 @@ Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
 [directory]
-style = "fg:color_fg_light bg:color_dir"
-format = "[ $path ]($style)"
+format = "[ ($read_only )$path ](inverted fg:bright-blue)"
+read_only = "󰌾"
 truncation_length = 3
+truncate_to_repo = false
 truncation_symbol = "…/"
 "home_symbol" = "󰋜 "
 
 [directory.substitutions]
-"Documents" = " 󰈙 "
-"Downloads" = "  "
-"Music" = " 󰝚 "
-"Pictures" = "  "
-"Developer" = " 󰲋 "
+"/Documents/" = "/ 󰈙 /"
+"/Downloads/" = "/  /"
+"/Music/" = "/ 󰝚 /"
+"/Pictures/" = "/  /"
+"/Developer/" = "/  /"
+"/Programming/" = "/  /"
+"/Games/" = "/ 󰊗 /"
+"/Videos/" = "/ 󰕧 /"
+"/Experiments/" = "/  /"
+"/School/" = "/ 󰑴 /"
+"/Projects/" = "/  /"
 
 [git_branch]
+disabled = false
+only_attached = false
+always_show_remote = false
+ignore_branches = []
 symbol = ""
-style = "fg:color_fg_dark bg:color_git"
-format = "[](fg:color_git)[$symbol( $branch) ]($style)"
+style = "fg:green"
+format = "[]($style)[$symbol $branch(:$remote_branch) ]($style inverted)"
+
+[git_commit]
+style = "fg:green"
+format = "[\\($hash$tag\\) ]($style inverted)"
+
+[git_state]
+style = "fg:green"
+format = "[\\($state( $progress_current/$progress_total)\\) ]($style inverted)"
+
+[git_metrics]
+disabled = true
 
 [git_status]
 disabled = false
-style = "fg:color_fg_dark bg:color_git"
-format = "[($all_status$ahead_behind)]($style)[](fg:color_git)"
+style = "fg:green"
+format = "[($all_status$ahead_behind)]($style inverted)[]($style)"
 
 [docker_context]
 symbol = ""
-style = "fg:color_fg_light bg:color_docker"
-format = "[](fg:color_docker)[$symbol( $context)]($style)[](fg:color_docker)"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $context)]($style inverted)[]($style)"
 
 [container]
 symbol = "󰆦"
-style = "fg:color_fg_light bg:color_container"
-format = "[](fg:color_container)[$symbol( $name)]($style)[](fg:color_container)"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $name)]($style inverted)[]($style)"
 
 [username]
 disabled = true
@@ -196,82 +179,87 @@ disabled = true
 [hostname]
 ssh_only = true
 ssh_symbol = "󰖩"
-style = "fg:color_fg_dark bg:color_ssh"
-format = "[](fg:color_ssh)[$ssh_symbol]($style)[](fg:color_ssh)"
+style = "fg:green"
+format = "[]($style)[$ssh_symbol]($style inverted)[]($style)"
 
 [package]
 symbol = "󰏖"
-style = "fg:color_fg_dark bg:color_package"
-format = "[](fg:color_package)[$symbol( $version)]($style)[](fg:color_package)"
+style = "fg:bright-yellow"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [nodejs]
 symbol = ""
-style = "bg:color_dir"
-format = "[[$symbol( $version)](fg:color_fg_light bg:color_dir)]($style)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [c]
 symbol = ""
-style = "bg:color_c"
-format = "[](fg:color_c)[$symbol( $version)]($style)[](fg:color_c)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [cmake]
 disabled = false
 symbol = "󰔶"
-style = "fg:color_fg_light bg:color_cmake"
-format = "[](fg:color_cmake)[$symbol( $version)]($style)[](fg:color_cmake)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [rust]
 symbol = ""
-style = "fg:color_fg_dark bg:color_rust"
-format = "[](fg:color_rust)[$symbol( $version)]($style)[](fg:color_rust)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [golang]
 symbol = ""
-style = "bg:color_dir"
-format = "[[ $symbol( $version) ](fg:color_fg_light bg:color_dir)]($style)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [php]
 symbol = ""
-style = "bg:color_dir"
-format = "[[ $symbol( $version) ](fg:color_fg_light bg:color_dir)]($style)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [java]
 symbol = ""
-style = "fg:color_fg_dark bg:color_java"
-format = "[](fg:color_java)[$symbol( $version)]($style)[](fg:color_java)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [kotlin]
 symbol = ""
-style = "bg:color_dir"
-format = "[[ $symbol( $version) ](fg:color_fg_light bg:color_dir)]($style)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [haskell]
 symbol = ""
-style = "bg:color_dir"
-format = "[[ $symbol( $version) ](fg:color_fg_light bg:color_dir)]($style)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [python]
 symbol = ""
-style = "bg:color_dir"
-format = "[[ $symbol( $version) ](fg:color_fg_light bg:color_dir)]($style)"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[gradle]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [time]
 disabled = false
 time_format = "%R"
-format = "[ $time ](color_fg_light)"
+format = "[ $time ](blue)"
 
 [line_break]
 disabled = true
 
 [character]
 disabled = false
-success_symbol = "[❯](bold fg:color_dir)"
+success_symbol = "[❯](bold fg:blue)"
 
 [cmd_duration]
 disabled = false
 min_time = 100
-style = "bold fg:color_fg_light bg:color_cmd_duration"
-format = "[](fg:color_cmd_duration)[$duration]($style)[](fg:color_cmd_duration)"
+style = "fg:bright-blue"
+format = "[]($style)[$duration]($style inverted)[]($style)"
 
 [battery]
 full_symbol = "󰁹 "
@@ -279,9 +267,9 @@ charging_symbol = "󰂄 "
 discharging_symbol = "󰂃 "
 unknown_symbol = "󰁽 "
 empty_symbol = "󰂎 "
-format = "[](fg:color_battery)[$symbol$percentage](bg:color_battery)[](fg:color_battery)"
+format = "[]($style)[$symbol$percentage]($style inverted)[]($style)"
 disabled = false
 
 [[battery.display]]
 threshold = 20
-style = "red bold"
+style = "fg:bright-red"
