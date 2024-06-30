@@ -3,9 +3,29 @@
 https://www.nerdfonts.com/font-downloads
 ## Install Starship
 https://starship.rs/guide/#%F0%9F%9A%80-installation
+## System Specific Instructions
+### Fish Setup
+#### Setup Starship with Transient Prompt
+Add this to ~/.config/fish/config.fish
+```fish
+function starship_transient_prompt_func
+  starship module character
+end
+starship init fish | source
+enable_transience
+```
+#### Install Theme
+Clone this repository into .config
+```fish
+git clone https://github.com/Anti-Shulk/Anti-Shulk-Starship-Theme.git ~/.config/Anti-Shulk-Starship-Theme
+```
+Copy the theme file into the .config directory
+```fish
+cp ~/.config/Anti-Shulk-Starship-Theme/starship.toml ~/.config/starship.toml
+```
 ### Windows Powershell Setup
 #### Install Starship
-Install WInget
+Install Winget
 ```powershell
 $progressPreference = 'silentlyContinue'
 Write-Information "Downloading WinGet and its dependencies..."
@@ -44,7 +64,7 @@ Enable powershell script execution in Administator Powershell
 ```powershell
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope LocalMachine
 ```
-#### Clone this Repository
+#### Install Theme
 Install Git if it is not already installed
 ```powershell
 winget instal Git.Git
