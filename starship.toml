@@ -140,18 +140,18 @@ truncation_symbol = "…/"
 "home_symbol" = "󰋜 "
 
 [directory.substitutions]
-"/Documents/" = "/ 󰈙 /"
-"/Downloads/" = "/  /"
-"/Music/" = "/ 󰝚 /"
-"/Pictures/" = "/  /"
-"/Developer/" = "/  /"
-"/Programming/" = "/  /"
-"/Games/" = "/ 󰊗 /"
-"/Videos/" = "/ 󰕧 /"
-"/Experiments/" = "/  /"
-"/School/" = "/ 󰑴 /"
-"/Projects/" = "/  /"
-"/Desktop/" = "/ 󰇄 /"
+# "/Documents/" = "/ 󰈙 /"
+# "/Downloads/" = "/  /"
+# "/Music/" = "/ 󰝚 /"
+# "/Pictures/" = "/  /"
+# "/Developer/" = "/  /"
+# "/Programming/" = "/  /"
+# "/Games/" = "/ 󰊗 /"
+# "/Videos/" = "/ 󰕧 /"
+# "/Experiments/" = "/  /"
+# "/School/" = "/ 󰑴 /"
+# "/Projects/" = "/  /"
+# "/Desktop/" = "/ 󰇄 /"
 
 # Version Control Systems
 [git_branch]
@@ -563,8 +563,8 @@ disabled = true
 [line_break]
 disabled = true
 
-# [character]
-# success_symbol = "[❯](bold fg:blue)"
+[character]
+success_symbol = "[❯](bold fg:blue)"
 
 [cmd_duration]
 min_time = 100
