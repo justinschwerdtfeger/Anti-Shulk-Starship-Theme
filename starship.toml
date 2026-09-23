@@ -183,8 +183,8 @@ symbol = ""
 style = "fg:green"
 format = "[]($style)[$symbol $branch(:$topic)]($style inverted)[]($style)"
 
-[hg_state]
-disabled=true
+# [hg_state]
+# disabled=true
 
 [pijul_channel]
 disabled=true
