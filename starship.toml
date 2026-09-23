@@ -1,6 +1,6 @@
 "$schema" = "https://starship.rs/config-schema.json"
 
-format = "[]()$os[](bg:bright-blue)$directory[ ](fg:bright-blue)"
+format = "[]()$os[ ](inverted)[](bg:bright-blue)$directory[ ](fg:bright-blue)"
 
 right_format = """
 $vcsh\
@@ -102,7 +102,7 @@ $sudo\
 
 [os]
 disabled = false
-format = "[$symbol ](inverted)"
+format = "[$symbol](inverted)"
 
 [os.symbols]
 Windows = "󰍲"
@@ -155,7 +155,6 @@ truncation_symbol = "…/"
 
 # Version Control Systems
 [git_branch]
-disabled = false
 only_attached = false
 always_show_remote = false
 ignore_branches = []
@@ -175,24 +174,32 @@ format = "[\\($state( $progress_current/$progress_total)\\) ]($style inverted)"
 disabled = true
 
 [git_status]
-disabled = false
 style = "fg:green"
 format = "[($all_status$ahead_behind)]($style inverted)[]($style)"
 
 [hg_branch]
+disabled=true
 symbol = ""
 style = "fg:green"
-format = "[]($style)[$symbol $branch]($style inverted)[]($style)"
+format = "[]($style)[$symbol $branch(:$topic)]($style inverted)[]($style)"
+
+[hg_state]
+disabled=true
 
 [pijul_channel]
+disabled=true
 symbol = ""
 style = "fg:green"
 format = "[]($style)[$symbol $channel]($style inverted)[]($style)"
 
 [fossil_branch]
+disabled=true
 symbol = ""
 style = "fg:green"
 format = "[]($style)[$symbol $branch]($style inverted)[]($style)"
+
+[fossil_metrics]
+disabled=true
 
 # Containers, Cloud & Infrastructure
 [docker_context]
@@ -217,6 +224,7 @@ style = "fg:bright-purple"
 format = "[]($style)[$symbol( $profile)(:$region)]($style inverted)[]($style)"
 
 [azure]
+disabled=true
 symbol = "󰠅"
 style = "fg:bright-purple"
 format = "[]($style)[$symbol( $subscription)]($style inverted)[]($style)"
@@ -245,7 +253,7 @@ format = "[]($style)[$symbol( $cloud)(:$project)]($style inverted)[]($styl
 [pulumi]
 symbol = ""
 style = "fg:bright-purple"
-format = "[]($style)[$symbol( $stack)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $username@)$stack]($style inverted)[]($style)"
 
 [singularity]
 symbol = "󰆦"
@@ -270,7 +278,7 @@ format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 [nix_shell]
 symbol = ""
 style = "fg:bright-purple"
-format = "[]($style)[$symbol( $state)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $state)( $name)]($style inverted)[]($style)"
 
 [guix_shell]
 symbol = ""
@@ -280,9 +288,10 @@ format = "[]($style)[$symbol]($style inverted)[]($style)"
 [pixi]
 symbol = "󰏗"
 style = "fg:bright-purple"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version)( $environment)]($style inverted)[]($style)"
 
 [mise]
+disabled=true
 symbol = "󰒲"
 style = "fg:bright-purple"
 format = "[]($style)[$symbol( $health)]($style inverted)[]($style)"
@@ -302,7 +311,7 @@ format = "[]($style)[$symbol( $environment)]($style inverted)[]($style)"
 [dotnet]
 symbol = "󰌛"
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version)( 🎯 $tfm)]($style inverted)[]($style)"
 
 [nodejs]
 symbol = ""
@@ -322,15 +331,15 @@ format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 [c]
 symbol = ""
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version(-$name))]($style inverted)[]($style)"
 
 [cpp]
+disabled=false
 symbol = ""
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version(-$name))]($style inverted)[]($style)"
 
 [cmake]
-disabled = false
 symbol = "󰔶"
 style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
@@ -373,7 +382,7 @@ format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 [python]
 symbol = ""
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version)( $virtualenv)]($style inverted)[]($style)"
 
 [ruby]
 symbol = ""
@@ -403,7 +412,7 @@ format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 [elixir]
 symbol = ""
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version)( OTP $otp_version)]($style inverted)[]($style)"
 
 [elm]
 symbol = ""
@@ -443,7 +452,7 @@ format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 [ocaml]
 symbol = ""
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version)( $switch_name)]($style inverted)[]($style)"
 
 [odin]
 symbol = "󰈺"
@@ -473,7 +482,7 @@ format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 [raku]
 symbol = ""
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version)(-$vm_version)]($style inverted)[]($style)"
 
 [red]
 symbol = "🔺"
@@ -532,7 +541,6 @@ format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 # System, Shell & Session
 [username]
-disabled = false
 style_user = "fg:yellow"
 style_root = "fg:red"
 format = "[]($style)[$user]($style inverted)[]($style)"
@@ -544,24 +552,21 @@ style = "fg:green"
 format = "[]($style)[$ssh_symbol]($style inverted)[]($style)"
 
 [localip]
+disabled=false
 ssh_only = true
 format = "[]($style)[$localipv4]($style inverted)[]($style)"
 style = "fg:green"
 
 [time]
-disabled = false
-time_format = "%R"
-format = "[ $time ](blue)"
+disabled = true
 
 [line_break]
 disabled = true
 
-[character]
-disabled = false
-success_symbol = "[❯](bold fg:blue)"
+# [character]
+# success_symbol = "[❯](bold fg:blue)"
 
 [cmd_duration]
-disabled = false
 min_time = 100
 style = "fg:bright-blue"
 format = "[]($style)[$duration]($style inverted)[]($style)"
@@ -573,9 +578,10 @@ style = "fg:red"
 format = "[]($style)[$symbol $status]($style inverted)[]($style)"
 
 [memory_usage]
+disabled=true
 symbol = "󰍛"
 style = "fg:bright-blue"
-format = "[]($style)[$symbol $ram]($style inverted)[]($style)"
+format = "[]($style)[$symbol $ram( | $swap)]($style inverted)[]($style)"
 
 [jobs]
 symbol = "✦"
@@ -583,19 +589,22 @@ style = "fg:bright-blue"
 format = "[]($style)[$symbol $number]($style inverted)[]($style)"
 
 [sudo]
+disabled=false
 symbol = "󰌋"
 style = "fg:bright-red"
 format = "[]($style)[$symbol]($style inverted)[]($style)"
 
 [shlvl]
+disabled=true
 symbol = "󰘍"
 style = "fg:bright-blue"
 format = "[]($style)[$symbol$shlvl]($style inverted)[]($style)"
 
 [direnv]
+disabled=false
 symbol = "󰌪"
 style = "fg:bright-blue"
-format = "[]($style)[$symbol]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $loaded/$allowed)]($style inverted)[]($style)"
 
 [battery]
 full_symbol = "󰁹 "
@@ -604,7 +613,6 @@ discharging_symbol = "󰂃 "
 unknown_symbol = "󰁽 "
 empty_symbol = "󰂎 "
 format = "[]($style)[$symbol$percentage]($style inverted)[]($style)"
-disabled = false
 
 [[battery.display]]
 threshold = 20
