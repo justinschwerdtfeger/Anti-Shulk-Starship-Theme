@@ -16,7 +16,9 @@ $pijul_channel\
 \
 $package\
 \
+$bun\
 $c\
+$cpp\
 $cmake\
 $cobol\
 $crystal\
@@ -28,68 +30,74 @@ $elixir\
 $elm\
 $erlang\
 $fennel\
+$gleam\
 $golang\
-$guix_shell\
+$gradle\
 $haskell\
 $haxe\
-$helm\
 $java\
 $julia\
 $kotlin\
-$gradle\
 $lua\
+$meson\
+$mojo\
 $nim\
 $nodejs\
 $ocaml\
+$odin\
 $opa\
 $perl\
 $php\
-$pulumi\
 $purescript\
 $python\
+$quarto\
 $raku\
-$rlang\
 $red\
+$rlang\
 $ruby\
 $rust\
 $scala\
 $solidity\
+$spack\
 $swift\
-$terraform\
 $typst\
 $vlang\
-$vagrant\
 $zig\
 \
 $aws\
+$azure\
 $buf\
 $conda\
 $container\
 $docker_context\
 $gcloud\
-$hostname\
-$nix_shell\
-$meson\
-$openstack\
-$spack\
-$singularity\
+$helm\
 $kubernetes\
+$nix_shell\
+$guix_shell\
+$openstack\
+$pulumi\
+$singularity\
+$terraform\
+$vagrant\
+$pixi\
+$mise\
 \
 $battery\
 $cmd_duration\
+$status\
 \
 $jobs\
 $username\
+$hostname\
 $localip\
 $shlvl\
 $memory_usage\
-$azure\
 $env_var\
 $custom\
 $direnv\
 $shell\
 $sudo\
-$status\
 """
 
 [os]
@@ -116,6 +124,12 @@ CentOS = ""
 Debian = "󰣚"
 Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
+Pop = ""
+NixOS = ""
+EndeavourOS = ""
+Void = ""
+FreeBSD = ""
+OpenBSD = "󰈺"
 
 [directory]
 format = "[ ($read_only )$path ](inverted fg:bright-blue)"
@@ -137,7 +151,9 @@ truncation_symbol = "…/"
 "/Experiments/" = "/  /"
 "/School/" = "/ 󰑴 /"
 "/Projects/" = "/  /"
+"/Desktop/" = "/ 󰇄 /"
 
+# Version Control Systems
 [git_branch]
 disabled = false
 only_attached = false
@@ -163,6 +179,22 @@ disabled = false
 style = "fg:green"
 format = "[($all_status$ahead_behind)]($style inverted)[]($style)"
 
+[hg_branch]
+symbol = ""
+style = "fg:green"
+format = "[]($style)[$symbol $branch]($style inverted)[]($style)"
+
+[pijul_channel]
+symbol = ""
+style = "fg:green"
+format = "[]($style)[$symbol $channel]($style inverted)[]($style)"
+
+[fossil_branch]
+symbol = ""
+style = "fg:green"
+format = "[]($style)[$symbol $branch]($style inverted)[]($style)"
+
+# Containers, Cloud & Infrastructure
 [docker_context]
 symbol = ""
 style = "fg:bright-purple"
@@ -173,18 +205,103 @@ symbol = "󰆦"
 style = "fg:bright-purple"
 format = "[]($style)[$symbol( $name)]($style inverted)[]($style)"
 
-[username]
-disabled = true
+[gcloud]
+disabled=true
+symbol = "󱇶"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $account)(:$project)]($style inverted)[]($style)"
 
-[hostname]
-ssh_only = true
-ssh_symbol = "󰖩"
-style = "fg:green"
-format = "[]($style)[$ssh_symbol]($style inverted)[]($style)"
+[aws]
+symbol = "󰸏"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $profile)(:$region)]($style inverted)[]($style)"
 
+[azure]
+symbol = "󰠅"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $subscription)]($style inverted)[]($style)"
+
+[kubernetes]
+disabled = false
+symbol = "󱃾"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $context)(:$namespace)]($style inverted)[]($style)"
+
+[terraform]
+symbol = "󱁢"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $workspace)]($style inverted)[]($style)"
+
+[helm]
+symbol = "⎈"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[openstack]
+symbol = "󰢤"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $cloud)(:$project)]($style inverted)[]($style)"
+
+[pulumi]
+symbol = ""
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $stack)]($style inverted)[]($style)"
+
+[singularity]
+symbol = "󰆦"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $env)]($style inverted)[]($style)"
+
+[vagrant]
+symbol = ""
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[conda]
+symbol = ""
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $environment)]($style inverted)[]($style)"
+
+[buf]
+symbol = ""
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[nix_shell]
+symbol = ""
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $state)]($style inverted)[]($style)"
+
+[guix_shell]
+symbol = ""
+style = "fg:bright-purple"
+format = "[]($style)[$symbol]($style inverted)[]($style)"
+
+[pixi]
+symbol = "󰏗"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[mise]
+symbol = "󰒲"
+style = "fg:bright-purple"
+format = "[]($style)[$symbol( $health)]($style inverted)[]($style)"
+
+# Package Managers
 [package]
 symbol = "󰏖"
 style = "fg:bright-yellow"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[spack]
+symbol = "󰏖"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $environment)]($style inverted)[]($style)"
+
+# Programming Languages & Runtimes
+[dotnet]
+symbol = "󰌛"
+style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
 [nodejs]
@@ -192,8 +309,23 @@ symbol = ""
 style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
+[bun]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[deno]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
 [c]
 symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[cpp]
+symbol = ""
 style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
@@ -228,6 +360,11 @@ symbol = ""
 style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
+[gradle]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
 [haskell]
 symbol = ""
 style = "fg:cyan"
@@ -238,10 +375,178 @@ symbol = ""
 style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
-[gradle]
-symbol = ""
+[ruby]
+symbol = ""
 style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[lua]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[swift]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[zig]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[dart]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[elixir]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[elm]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[erlang]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[fennel]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[gleam]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[haxe]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[julia]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[nim]
+symbol = "󰆥"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[ocaml]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[odin]
+symbol = "󰈺"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[opa]
+symbol = "󰈸"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[perl]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[purescript]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[quarto]
+symbol = "󱓧"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[raku]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[red]
+symbol = "🔺"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[rlang]
+symbol = "󰟔"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[scala]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[solidity]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[typst]
+symbol = "󰲰"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[vlang]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[crystal]
+symbol = ""
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[daml]
+symbol = "λ"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[cobol]
+symbol = "⚙"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+[meson]
+symbol = "󰔷"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $project)]($style inverted)[]($style)"
+
+[mojo]
+symbol = "🔥"
+style = "fg:cyan"
+format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
+
+# System, Shell & Session
+[username]
+disabled = false
+style_user = "fg:yellow"
+style_root = "fg:red"
+format = "[]($style)[$user]($style inverted)[]($style)"
+
+[hostname]
+ssh_only = true
+ssh_symbol = "󰖩"
+style = "fg:green"
+format = "[]($style)[$ssh_symbol]($style inverted)[]($style)"
+
+[localip]
+ssh_only = true
+format = "[]($style)[$localipv4]($style inverted)[]($style)"
+style = "fg:green"
 
 [time]
 disabled = false
@@ -260,6 +565,37 @@ disabled = false
 min_time = 100
 style = "fg:bright-blue"
 format = "[]($style)[$duration]($style inverted)[]($style)"
+
+[status]
+disabled = false
+symbol = ""
+style = "fg:red"
+format = "[]($style)[$symbol $status]($style inverted)[]($style)"
+
+[memory_usage]
+symbol = "󰍛"
+style = "fg:bright-blue"
+format = "[]($style)[$symbol $ram]($style inverted)[]($style)"
+
+[jobs]
+symbol = "✦"
+style = "fg:bright-blue"
+format = "[]($style)[$symbol $number]($style inverted)[]($style)"
+
+[sudo]
+symbol = "󰌋"
+style = "fg:bright-red"
+format = "[]($style)[$symbol]($style inverted)[]($style)"
+
+[shlvl]
+symbol = "󰘍"
+style = "fg:bright-blue"
+format = "[]($style)[$symbol$shlvl]($style inverted)[]($style)"
+
+[direnv]
+symbol = "󰌪"
+style = "fg:bright-blue"
+format = "[]($style)[$symbol]($style inverted)[]($style)"
 
 [battery]
 full_symbol = "󰁹 "

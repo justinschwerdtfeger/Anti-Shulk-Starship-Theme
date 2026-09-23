@@ -19,7 +19,13 @@ Clone this repository into .config
 ```fish
 git clone https://github.com/Anti-Shulk/Anti-Shulk-Starship-Theme.git ~/.config/Anti-Shulk-Starship-Theme
 ```
-Copy the theme file into the .config directory
+
+Create a symbolic link (recommended):
+```fish
+ln -s ~/.config/Anti-Shulk-Starship-Theme/starship.toml ~/.config/starship.toml
+```
+
+Or copy the theme file into the .config directory:
 ```fish
 cp ~/.config/Anti-Shulk-Starship-Theme/starship.toml ~/.config/starship.toml
 ```
