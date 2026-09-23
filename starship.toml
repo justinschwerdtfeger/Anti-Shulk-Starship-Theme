@@ -311,7 +311,7 @@ format = "[]($style)[$symbol( $environment)]($style inverted)[]($style)"
 [dotnet]
 symbol = "󰌛"
 style = "fg:cyan"
-format = "[]($style)[$symbol( $version)( 🎯 $tfm)]($style inverted)[]($style)"
+format = "[]($style)[$symbol( $version)( $tfm)]($style inverted)[]($style)"
 
 [nodejs]
 symbol = ""
@@ -535,7 +535,7 @@ style = "fg:cyan"
 format = "[]($style)[$symbol( $project)]($style inverted)[]($style)"
 
 [mojo]
-symbol = "🔥"
+symbol = ""
 style = "fg:cyan"
 format = "[]($style)[$symbol( $version)]($style inverted)[]($style)"
 
